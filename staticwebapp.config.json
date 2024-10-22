@@ -32,11 +32,11 @@
     },
     {
       "route": "/LogoutRedirect",
-      "allowedRoles": ["admin", "editor", "readonly", "authenticated", "anonymous"]
+      "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "authenticated", "anonymous"]
     },
     {
       "route": "/404",
-      "allowedRoles": ["admin", "editor", "readonly", "authenticated", "anonymous"]
+      "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "authenticated", "anonymous"]
     },
     {
       "route": "/api/RemoveStandard",
@@ -44,11 +44,11 @@
     },
     {
       "route": "/api/add*",
-      "allowedRoles": ["admin", "editor"]
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
     },
     {
       "route": "/api/edit*",
-      "allowedRoles": ["admin", "editor"]
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
     },
     {
       "route": "/api/ExecSendPush",
@@ -60,11 +60,11 @@
     },
     {
       "route": "/api/Exec*",
-      "allowedRoles": ["admin", "editor"]
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
     },
     {
       "route": "/api/Remove*",
-      "allowedRoles": ["admin", "editor"]
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
     },
     {
       "route": "/cipp/*",
@@ -76,15 +76,15 @@
     },
     {
       "route": "/",
-      "allowedRoles": ["admin", "editor", "readonly", "reader", "authenticated", "anonymous"]
+      "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "reader", "authenticated", "anonymous"]
     },
     {
       "route": "/api/Public*",
-      "allowedRoles": ["admin", "editor", "readonly", "reader", "authenticated", "anonymous"]
+      "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "reader", "authenticated", "anonymous"]
     },
     {
       "route": "*",
-      "allowedRoles": ["admin", "editor", "readonly", "reader"]
+      "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "reader"]
     }
   ],
   "navigationFallback": {
