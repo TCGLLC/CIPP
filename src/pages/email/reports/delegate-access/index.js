@@ -1,9 +1,9 @@
 import { Layout as DashboardLayout } from "/src/layouts/index.js";
-import { CippTablePage } from "/src/components/CippComponents/CippTablePage.jsx";
+import { CippFixedTablePage } from "/src/components/CippComponents/CippFixedTablePage.jsx";
 
 const Page = () => {
   return (
-    <CippTablePage
+    <CippFixedTablePage
       title="Delegate Access Report"
       apiUrl="/api/ListDelegateAccess"
       simpleColumns={[
