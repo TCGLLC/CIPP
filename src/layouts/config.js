@@ -366,6 +366,7 @@ export const nativeMenuItems = [
             title: "Anti-Phishing Filters",
             path: "/email/reports/antiphishing-filters",
           },
+		  { title: "Delegate Access Report", path: "/email/reports/delegate-access", },
           { title: "Malware Filters", path: "/email/reports/malware-filters" },
           {
             title: "Safe Links Filters",
