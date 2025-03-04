@@ -293,7 +293,7 @@ export const CippFixedDataTable = (props) => {
           {getRequestData.isError && (
             <ResourceError
               onReload={() => getRequestData.refetch()}
-              message={`Error Loading data:  ${getCippError(getRequestData.error)}`}
+              message={`Please come back in a few minutes when your report has completed loading.`}
             />
           )}
         </Scrollbar>
@@ -323,7 +323,7 @@ export const CippFixedDataTable = (props) => {
               {getRequestData.isError && (
                 <ResourceError
                   onReload={() => getRequestData.refetch()}
-                  message={`Error Loading data:  ${getCippError(getRequestData.error)}`}
+                  message={`Please come back in a few minutes when your report has completed loading.`}
                 />
               )}
             </Scrollbar>
