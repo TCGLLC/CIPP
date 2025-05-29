@@ -15,7 +15,6 @@ const markOpenItems = (items, pathname) => {
   return items.map((item) => {
     const checkPath = !!(item.path && pathname);
     const exactMatch = checkPath ? pathname === item.path : false;
-    // Use startsWith for partial matches so that subpages not in the menu still keep parent open
     const partialMatch = checkPath ? pathname.startsWith(item.path) : false;
 
     let openImmediately = exactMatch;
@@ -24,11 +23,9 @@ const markOpenItems = (items, pathname) => {
     if (newItems.length > 0) {
       newItems = markOpenItems(newItems, pathname);
       const childOpen = newItems.some((child) => child.openImmediately);
-      // Parent should open if exactMatch, childOpen, or partialMatch
-      openImmediately = openImmediately || childOpen || partialMatch;
+      openImmediately = openImmediately || childOpen || exactMatch; // Ensure parent opens if child is open
     } else {
-      // For leaf items, consider them open if exact or partial match
-      openImmediately = openImmediately || partialMatch;
+      openImmediately = openImmediately || partialMatch; // Leaf items open on partial match
     }
 
     return {
@@ -47,8 +44,6 @@ const reduceChildRoutes = ({ acc, collapse, depth, item, pathname }) => {
   const exactMatch = checkPath && pathname === item.path;
   const partialMatch = checkPath && pathname.startsWith(item.path);
 
-  // Consider item active if exactMatch or partialMatch for leaf items
-  // For parent items, being active is determined by their children or openImmediately
   const hasChildren = item.items && item.items.length > 0;
   const isActive = exactMatch || (partialMatch && !hasChildren);
 
@@ -107,7 +102,7 @@ export const SideNav = (props) => {
   const pathname = usePathname();
   const [hovered, setHovered] = useState(false);
   const collapse = !(pinned || hovered);
-  const { data: profile } = ApiGetCall({ url: "/.auth/me", queryKey: "authmecipp" });
+  const { data: profile } = ApiGetCall({ url: "/api/me", queryKey: "authmecipp" });
 
   // Preprocess items to mark which should be open
   const processedItems = markOpenItems(items, pathname);
@@ -116,64 +111,64 @@ export const SideNav = (props) => {
   const theme = currentSettings?.currentTheme?.value;
 
   return (
-    <Drawer
-      open
-      variant="permanent"
-      PaperProps={{
-        onMouseEnter: () => {
-          setHovered(true);
-        },
-        onMouseLeave: () => {
-          setHovered(false);
-        },
-        sx: {
-          backgroundColor: "background.default",
-          height: `calc(100% - ${TOP_NAV_HEIGHT}px)`,
-          overflowX: "hidden",
-          top: TOP_NAV_HEIGHT,
-          transition: "width 250ms ease-in-out",
-          width: collapse ? SIDE_NAV_COLLAPSED_WIDTH : SIDE_NAV_WIDTH,
-          zIndex: (theme) => theme.zIndex.appBar - 100,
-        },
-      }}
-    >
-      <Scrollbar
-        sx={{
-          height: "100%",
-          overflowX: "hidden",
-          "& .simplebar-content": {
-            height: "100%",
-          },
-        }}
-      >
-        <Box
-          component="nav"
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            height: "100%",
-            p: 2,
+    <>
+      {profile?.clientPrincipal && profile?.clientPrincipal?.userRoles?.length > 2 && (
+        <Drawer
+          open
+          variant="permanent"
+          PaperProps={{
+            onMouseEnter: () => {
+              setHovered(true);
+            },
+            onMouseLeave: () => {
+              setHovered(false);
+            },
+            sx: {
+              backgroundColor: "background.default",
+              height: `calc(100% - ${TOP_NAV_HEIGHT}px)`,
+              overflowX: "hidden",
+              top: TOP_NAV_HEIGHT,
+              transition: "width 250ms ease-in-out",
+              width: collapse ? SIDE_NAV_COLLAPSED_WIDTH : SIDE_NAV_WIDTH,
+              zIndex: (theme) => theme.zIndex.appBar - 100,
+            },
           }}
         >
-          <Box
-            component="ul"
+          <Scrollbar
             sx={{
-              flexGrow: 1,
-              listStyle: "none",
-              m: 0,
-              p: 0,
+              height: "100%",
+              overflowX: "hidden",
+              "& .simplebar-content": {
+                height: "100%",
+              },
             }}
           >
-            {renderItems({
-              collapse,
-              depth: 0,
-              items: processedItems,
-              pathname,
-            })}
-          </Box>
-        </Box>
-      </Scrollbar>
-    </Drawer>
+            <Box
+              component="nav"
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                height: "100%",
+                p: 2,
+              }}
+            >
+              <Box
+                component="ul"
+                sx={{
+                  flexGrow: 1,
+                  listStyle: "none",
+                  m: 0,
+                  p: 0,
+                }}
+              >
+              </Box>{" "}
+              {/* Add this closing tag */}
+            </Box>{" "}
+            {/* Closing tag for the parent Box */}
+          </Scrollbar>
+        </Drawer>
+      )}
+    </>
   );
 };
 
