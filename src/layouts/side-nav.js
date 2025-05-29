@@ -161,6 +161,12 @@ export const SideNav = (props) => {
                   p: 0,
                 }}
               >
+                {renderItems({
+                  collapse,
+                  depth: 0,
+                  items: processedItems,
+                  pathname,
+                })}
               </Box>{" "}
               {/* Add this closing tag */}
             </Box>{" "}
