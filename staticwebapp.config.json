@@ -51,6 +51,34 @@
       "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "authenticated", "anonymous"]
     },
     {
+      "route": "/api/RemoveStandard",
+      "allowedRoles": ["admin"]
+    },
+    {
+      "route": "/api/add*",
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
+    },
+    {
+      "route": "/api/edit*",
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
+    },
+    {
+      "route": "/api/ExecSendPush",
+      "allowedRoles": ["admin", "editor", "readonly"]
+    },
+    {
+      "route": "/api/ExecExcludeTenant",
+      "allowedRoles": ["admin"]
+    },
+    {
+      "route": "/api/Exec*",
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
+    },
+    {
+      "route": "/api/Remove*",
+      "allowedRoles": ["admin", "editor", "l1", "l2"]
+    },
+    {
       "route": "*",
       "allowedRoles": ["admin", "editor", "l1", "l2", "readonly", "authenticated"]
     }
