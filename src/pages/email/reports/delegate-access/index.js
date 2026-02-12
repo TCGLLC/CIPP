@@ -1,5 +1,5 @@
-import { Layout as DashboardLayout } from "/src/layouts/index.js";
-import { CippFixedTablePage } from "/src/components/CippComponents/CippFixedTablePage.jsx";
+import { Layout as DashboardLayout } from "../../../../layouts/index.js";
+import { CippFixedTablePage } from "../../../../components/CippComponents/CippFixedTablePage.jsx";
 
 const Page = () => {
   return (
