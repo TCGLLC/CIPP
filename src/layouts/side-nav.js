@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import PropTypes from "prop-types";
-import { Box, Divider, Drawer, Stack, Typography } from "@mui/material";
+import { Box, Drawer, Stack } from "@mui/material";
 import { Scrollbar } from "../components/scrollbar";
 import { SideNavItem } from "./side-nav-item";
-import { useSettings } from "../hooks/use-settings";
 import { ApiGetCall } from "../api/ApiCall.jsx";
+import { CippSponsor } from "../components/CippComponents/CippSponsor";
 
 const SIDE_NAV_WIDTH = 270;
 const SIDE_NAV_COLLAPSED_WIDTH = 73; // icon size + padding + border right
@@ -108,10 +108,6 @@ export const SideNav = (props) => {
 
   // Preprocess items to mark which should be open
   const processedItems = markOpenItems(items, pathname);
-  //select a random sponsor image based on priority, priority 1 should be higher than priority 2 or higher
-  const currentSettings = useSettings();
-  const theme = currentSettings?.currentTheme?.value;
-
   return (
     <>
       {profile?.clientPrincipal && profile?.clientPrincipal?.userRoles?.length > 2 && (
@@ -171,6 +167,7 @@ export const SideNav = (props) => {
                 })}
               </Box>{" "}
               {/* Add this closing tag */}
+              {profile?.clientPrincipal && <CippSponsor />}
             </Box>{" "}
             {/* Closing tag for the parent Box */}
           </Scrollbar>
